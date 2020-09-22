@@ -1,0 +1,91 @@
+
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+var boySprite,boyImage;
+var mango1,mango2,mango3,mango4,mango5;
+function preload()
+{
+  boyImage=loadImage("boy.png")
+  mango1Image=loadImage("mango.png")
+  mango2Image=loadImage("mango.png")
+  mango3Image=loadImage("mango.png")
+  mango4Image=loadImage("mango.png")
+  mango5Image=loadImage("mango.png")
+}
+
+function setup() {
+	createCanvas(800, 700);
+  boySprite=createSprite(150,600,50,10);
+  boySprite.addImage(boyImage);
+  boySprite.scale=0.1;
+
+  mango1=createSprite(400,200,20,20);
+  mango1.addImage(mango1Image);
+  mango1.scale=0.1;
+
+  mango2=createSprite(500,200,20,20);
+  mango2.addImage(mango2Image);
+  mango2.scale=0.1;
+
+  mango3=createSprite(600,100,20,20);
+  mango3.addImage(mango3Image);
+  mango3.scale=0.1;
+
+  mango4=createSprite(700,50,20,20);
+  mango4.addImage(mango4Image);
+  mango4.scale=0.1;
+
+  mango5=createSprite(760,300,20,20);
+  mango5.addImage(mango5Image);
+  mango5.scale=0.1;
+
+	engine = Engine.create();
+	world = engine.world;
+
+	ground= new Ground(width/2,670,width,20);
+  tree=new Tree (10,60,5,20);
+  stone= new Stone(30,50,20,20);
+
+
+	Engine.run(engine);
+  
+}
+
+
+function draw() {
+  rectMode(CENTER);
+  background(800,700);
+
+  ground.display();
+  tree.display();
+  stone.display();
+
+
+
+  detectCollision(Stone,mango1);
+  detectCollision(Stone,mango2);
+  detectCollision(Stone,mango3);
+  detectCollision(Stone,mango4);
+  detectCollision(Stone,mango5);
+
+
+  
+  drawSprites();
+ 
+}
+
+function mouseDragged(){
+  Matter.Body.setPosition(Stone.body,{x:mouseX,y:mouseY});
+
+}
+
+function mouseReleased(){
+   elasticBand.fly();
+}
+
+function detectCollision(){
+
+  
+}
